@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import com.example.locationservice.R
+import com.example.locationservice.view.LocationViewModel
 
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,6 @@ import kotlinx.coroutines.flow.onEach
 import java.util.*
 
 
-@AndroidEntryPoint
 class LocationService : LifecycleService() {
 
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)

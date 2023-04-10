@@ -2,7 +2,7 @@ package com.example.locationservice.data
 
 import javax.inject.Inject
 
-class LocationRepository@Inject constructor(
+class LocationRepository(
     private val db: LocationDatabase
 ) {
 

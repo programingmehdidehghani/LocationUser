@@ -8,7 +8,6 @@ import android.os.Build
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
-@HiltAndroidApp
 class MyApp : Application() {
 
     override fun onCreate() {
