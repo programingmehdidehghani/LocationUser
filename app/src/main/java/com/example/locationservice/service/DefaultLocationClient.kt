@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.location.LocationManager
-import android.location.LocationRequest
 import android.os.Looper
+import android.util.Log
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
@@ -44,6 +45,10 @@ class DefaultLocationClient(
                 locationCallback,
                 Looper.getMainLooper()
             )
+
+            awaitClose{
+                client.removeLocationUpdates(locationCallback)
+            }
 
         }
     }

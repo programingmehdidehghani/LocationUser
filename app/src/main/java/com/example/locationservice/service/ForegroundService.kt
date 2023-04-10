@@ -68,8 +68,10 @@ class ForegroundService : LifecycleService() {
        locationClient.getLocationUpdate(5000L)
            .catch {  e -> e.printStackTrace()}
            .onEach { location ->
+               val currentTime = System.currentTimeMillis()
                val lat = location.latitude.toString().takeLast(3)
                val long = location.longitude.toString().takeLast(3)
+               Log.i("service", "lat is$lat")
                val updateNotification = notification.setContentText(
                    "Location: ($lat , $long)"
                )

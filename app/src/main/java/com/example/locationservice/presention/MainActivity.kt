@@ -44,8 +44,10 @@ fun isLocationPermissionGranted(context: Context){
                context as Activity,
                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
         } else{
-            val intent = Intent(context, ForegroundService::class.java)
-            context.startService(intent)
+            Intent(context,ForegroundService::class.java).apply {
+                action = ForegroundService.ACTION_START
+                context.startService(this)
+            }
         }
     }
     if ((ContextCompat.checkSelfPermission(
@@ -54,8 +56,10 @@ fun isLocationPermissionGranted(context: Context){
             requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }else{
-        val intent = Intent(context, ForegroundService::class.java)
-        context.startService(intent)
+        Intent(context,ForegroundService::class.java).apply {
+            action = ForegroundService.ACTION_START
+            context.startService(this)
+        }
     }
 
 }
