@@ -9,5 +9,5 @@ import androidx.room.RoomDatabase
     version = 1
 )
 abstract class LocationDatabase : RoomDatabase() {
-    abstract fun getRunDao() : LocationDAO
+    abstract fun getLocationDAO() : LocationDAO
 }
