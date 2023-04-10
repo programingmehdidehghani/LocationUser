@@ -3,6 +3,7 @@ package com.example.locationservice.presention
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -20,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.locationservice.service.ForegroundService
 import com.example.locationservice.ui.theme.LocationServiceTheme
 
 class MainActivity : ComponentActivity() {
@@ -41,6 +43,9 @@ fun isLocationPermissionGranted(context: Context){
            ActivityCompat.requestPermissions(
                context as Activity,
                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+        } else{
+            val intent = Intent(context, ForegroundService::class.java)
+            context.startService(intent)
         }
     }
     if ((ContextCompat.checkSelfPermission(
@@ -48,6 +53,9 @@ fun isLocationPermissionGranted(context: Context){
         SideEffect {
             requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
+    }else{
+        val intent = Intent(context, ForegroundService::class.java)
+        context.startService(intent)
     }
 
 }

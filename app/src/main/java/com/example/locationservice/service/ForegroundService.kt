@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
@@ -30,33 +31,16 @@ class ForegroundService : LifecycleService() {
     @Inject
     lateinit var baseNotificationBuilder : NotificationCompat.Builder
 
-    lateinit var curNotificationBuilder : NotificationCompat.Builder
+   // lateinit var curNotificationBuilder : NotificationCompat.Builder
 
     override fun onCreate() {
-        curNotificationBuilder = baseNotificationBuilder
+        Log.i("service","is running")
         super.onCreate()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        intent?.let {
-            when (intent.action) {
-                ACTION_START_OR_RESUME_SERVICE -> {
-                    if (isFirstRun) {
-                        startForegroundService()
-                        isFirstRun = false
-                    } else {
-                        Timber.d("resuming service ...")
-                    }
-                }
-                ACTION_PAUSE_SERVICE -> {
-                    Timber.d("paused service")
-                }
-                ACTION_STOP_SERVICE -> {
-                    Timber.d("stoped service")
-                    killService()
-                }
-            }
-        }
+        Log.i("service", "is running")
+        startForegroundService()
         return super.onStartCommand(intent, flags, startId)
     }
 
