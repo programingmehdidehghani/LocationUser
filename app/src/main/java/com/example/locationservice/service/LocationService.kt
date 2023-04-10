@@ -9,10 +9,9 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import com.example.locationservice.R
-import com.example.locationservice.view.LocationViewModel
+import com.example.locationservice.model.Location
 
 import com.google.android.gms.location.LocationServices
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -63,13 +62,15 @@ class LocationService : LifecycleService() {
            .catch {  e -> e.printStackTrace()}
            .onEach { location ->
                val currentTime = System.currentTimeMillis()
-               val lat = location.latitude.toString().takeLast(3)
-               val long = location.longitude.toString().takeLast(3)
+               val lat = location.latitude.toString().takeLast(5)
+               val long = location.longitude.toString().takeLast(5)
                Log.i("service", "lat is$lat")
                val updateNotification = notification.setContentText(
                    "Location: ($lat , $long)"
                )
                notificationManager.notify(1,updateNotification.build())
+               var location = Location(long,lat,currentTime)
+               locationList.add(location)
            }
            .launchIn(serviceScope)
        startForeground(1,notification.build())
@@ -86,6 +87,7 @@ class LocationService : LifecycleService() {
     }
 
     companion object{
+        val locationList = mutableListOf<Location>()
         const val ACTION_START = "ACTION_START"
         const val ACTION_STOP = "ACTION_STOP"
     }

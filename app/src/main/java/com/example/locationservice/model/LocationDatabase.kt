@@ -1,4 +1,4 @@
-package com.example.locationservice.data
+package com.example.locationservice.model
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

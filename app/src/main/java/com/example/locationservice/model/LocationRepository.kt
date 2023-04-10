@@ -1,6 +1,4 @@
-package com.example.locationservice.data
-
-import javax.inject.Inject
+package com.example.locationservice.model
 
 class LocationRepository(
     private val db: LocationDatabase
