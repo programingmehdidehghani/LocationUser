@@ -8,6 +8,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.MutableLiveData
 import com.example.locationservice.R
 import com.example.locationservice.model.Location
 
@@ -70,7 +71,7 @@ class LocationService : LifecycleService() {
                )
                notificationManager.notify(1,updateNotification.build())
                var location = Location(long,lat,currentTime)
-               locationList.add(location)
+               timeRunInSeconds.postValue(location)
            }
            .launchIn(serviceScope)
        startForeground(1,notification.build())
@@ -90,5 +91,6 @@ class LocationService : LifecycleService() {
         val locationList = mutableListOf<Location>()
         const val ACTION_START = "ACTION_START"
         const val ACTION_STOP = "ACTION_STOP"
+        val timeRunInSeconds = MutableLiveData<Location>()
     }
 }

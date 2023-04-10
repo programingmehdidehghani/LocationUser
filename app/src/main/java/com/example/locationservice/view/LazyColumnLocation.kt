@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,11 +15,11 @@ import com.example.locationservice.model.Location
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun WeatherForecast(
-    state: Location,
+fun LazyColumnLocation(
+    location: Location,
     modifier: Modifier = Modifier
 ){
-    /*    Column(
+        Column(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
@@ -30,7 +31,7 @@ fun WeatherForecast(
             )
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn(content = {
-                items(state){ location ->
+                items(items = location, itemContent = { location ->
                     DetailListLocations(
                         location = location,
                         modifier = Modifier
@@ -39,7 +40,7 @@ fun WeatherForecast(
                     )
                 }
             })
-        }*/
+        }
 
 
 }
