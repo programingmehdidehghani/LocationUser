@@ -92,5 +92,6 @@ dependencies {
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-
+    // Google Maps Location Services
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
 }

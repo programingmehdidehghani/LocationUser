@@ -12,11 +12,9 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
 import com.example.locationservice.util.Constants.ACTION_PAUSE_SERVICE
 import com.example.locationservice.util.Constants.ACTION_START_OR_RESUME_SERVICE
-import com.example.locationservice.util.Constants.ACTION_STOP_SERVICE
 import com.example.locationservice.util.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.locationservice.util.Constants.NOTIFICATION_CHANNEL_NAME
 import com.example.locationservice.util.Constants.NOTIFICATION_ID
-import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -24,14 +22,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ForegroundService : LifecycleService() {
 
-    var isFirstRun = true
-    var serviceKilled = false
 
 
     @Inject
     lateinit var baseNotificationBuilder : NotificationCompat.Builder
 
-   // lateinit var curNotificationBuilder : NotificationCompat.Builder
 
     override fun onCreate() {
         Log.i("service","is running")
@@ -44,12 +39,6 @@ class ForegroundService : LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
-    private fun killService (){
-        serviceKilled = true
-        isFirstRun = true
-        stopForeground(true)
-        stopSelf()
-    }
 
     private fun startForegroundService() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)

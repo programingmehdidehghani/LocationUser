@@ -22,7 +22,6 @@ import dagger.hilt.android.scopes.ServiceScoped
 object ServiceModule {
 
 
-
     @SuppressLint("UnspecifiedImmutableFlag")
     @ServiceScoped
     @Provides
