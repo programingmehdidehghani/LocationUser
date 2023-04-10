@@ -30,7 +30,7 @@ fun LazyColumnLocation(
                 color = Color.White
             )
             Spacer(modifier = Modifier.height(16.dp))
-            LazyColumn(content = {
+          /*  LazyColumn(content = {
                 items(items = location, itemContent = { location ->
                     DetailListLocations(
                         location = location,
@@ -39,7 +39,7 @@ fun LazyColumnLocation(
                             .padding(horizontal = 16.dp)
                     )
                 }
-            })
+            })*/
         }
 
 

@@ -48,9 +48,9 @@ fun isLocationPermissionGranted(context: Context){
             Intent(context,LocationService::class.java).apply {
                 action = LocationService.ACTION_START
                 context.startService(this)
-                LocationService.timeRunInSeconds.observe(this, Observer {
+            /*    LocationService.locationTracking.observe(this, Observer {
                     LazyColumnLocation(location = it)
-                })
+                })*/
             }
         }
     }
@@ -63,9 +63,9 @@ fun isLocationPermissionGranted(context: Context){
         Intent(context,LocationService::class.java).apply {
             action = LocationService.ACTION_START
             context.startService(this)
-            LocationService.timeRunInSeconds.observe(this, Observer {
+           /* LocationService.locationTracking.observe(this, Observer {
                 LazyColumnLocation(location = it)
-            })
+            })*/
         }
     }
 

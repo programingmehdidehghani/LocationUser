@@ -27,7 +27,7 @@ class LocationService : LifecycleService() {
 
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private lateinit var locationClient: LocationClient
-    
+
 
     override fun onCreate() {
         super.onCreate()
@@ -67,7 +67,7 @@ class LocationService : LifecycleService() {
                )
                notificationManager.notify(1,updateNotification.build())
                var location = Location(long,lat,currentTime)
-               timeRunInSeconds.postValue(location)
+               locationTracking.postValue(location)
            }
            .launchIn(serviceScope)
        startForeground(1,notification.build())
@@ -86,6 +86,6 @@ class LocationService : LifecycleService() {
     companion object{
         const val ACTION_START = "ACTION_START"
         const val ACTION_STOP = "ACTION_STOP"
-        val timeRunInSeconds = MutableLiveData<Location>()
+        val locationTracking = MutableLiveData<Location>()
     }
 }
