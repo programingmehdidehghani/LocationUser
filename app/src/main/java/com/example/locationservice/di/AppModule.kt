@@ -2,7 +2,7 @@ package com.example.locationservice.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.locationservice.db.LocationDatabase
+import com.example.locationservice.data.LocationDatabase
 import com.example.locationservice.util.Constants.LOCATION_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
