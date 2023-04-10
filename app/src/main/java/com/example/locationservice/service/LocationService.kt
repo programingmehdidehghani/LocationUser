@@ -27,11 +27,7 @@ class LocationService : LifecycleService() {
 
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private lateinit var locationClient: LocationClient
-
-
-    override fun onBind(intent: Intent): IBinder? {
-        return super.onBind(intent)
-    }
+    
 
     override fun onCreate() {
         super.onCreate()
@@ -88,7 +84,6 @@ class LocationService : LifecycleService() {
     }
 
     companion object{
-        val locationList = mutableListOf<Location>()
         const val ACTION_START = "ACTION_START"
         const val ACTION_STOP = "ACTION_STOP"
         val timeRunInSeconds = MutableLiveData<Location>()
