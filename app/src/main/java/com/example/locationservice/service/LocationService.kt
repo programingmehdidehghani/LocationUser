@@ -1,17 +1,11 @@
 package com.example.locationservice.service
 
 import android.annotation.SuppressLint
-import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import android.location.Location
-import android.location.LocationManager
-import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import com.example.locationservice.R
@@ -26,15 +20,15 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.util.*
-import java.util.concurrent.Flow
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class ForegroundService : LifecycleService() {
+class LocationService : LifecycleService() {
 
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private lateinit var locationClient: LocationClient
+
+
     override fun onBind(intent: Intent): IBinder? {
         return super.onBind(intent)
     }

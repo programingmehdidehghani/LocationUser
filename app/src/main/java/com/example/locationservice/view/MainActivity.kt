@@ -1,4 +1,4 @@
-package com.example.locationservice.presention
+package com.example.locationservice.view
 
 import android.Manifest
 import android.app.Activity
@@ -10,18 +10,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.locationservice.service.ForegroundService
+import com.example.locationservice.service.LocationService
 import com.example.locationservice.ui.theme.LocationServiceTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,8 +37,8 @@ fun isLocationPermissionGranted(context: Context){
                context as Activity,
                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
         } else{
-            Intent(context,ForegroundService::class.java).apply {
-                action = ForegroundService.ACTION_START
+            Intent(context,LocationService::class.java).apply {
+                action = LocationService.ACTION_START
                 context.startService(this)
             }
         }
@@ -56,8 +49,8 @@ fun isLocationPermissionGranted(context: Context){
             requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }else{
-        Intent(context,ForegroundService::class.java).apply {
-            action = ForegroundService.ACTION_START
+        Intent(context,LocationService::class.java).apply {
+            action = LocationService.ACTION_START
             context.startService(this)
         }
     }
