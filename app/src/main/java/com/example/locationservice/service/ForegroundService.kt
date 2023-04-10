@@ -8,11 +8,14 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.Observer
 import com.example.locationservice.util.Constants.ACTION_PAUSE_SERVICE
 import com.example.locationservice.util.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.locationservice.util.Constants.ACTION_STOP_SERVICE
 import com.example.locationservice.util.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.locationservice.util.Constants.NOTIFICATION_CHANNEL_NAME
+import com.example.locationservice.util.Constants.NOTIFICATION_ID
+import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -23,10 +26,14 @@ class ForegroundService : LifecycleService() {
     var isFirstRun = true
     var serviceKilled = false
 
+
     @Inject
     lateinit var baseNotificationBuilder : NotificationCompat.Builder
 
+    lateinit var curNotificationBuilder : NotificationCompat.Builder
+
     override fun onCreate() {
+        curNotificationBuilder = baseNotificationBuilder
         super.onCreate()
     }
 
@@ -39,12 +46,10 @@ class ForegroundService : LifecycleService() {
                         isFirstRun = false
                     } else {
                         Timber.d("resuming service ...")
-                        startTime()
                     }
                 }
                 ACTION_PAUSE_SERVICE -> {
                     Timber.d("paused service")
-                    pauseService()
                 }
                 ACTION_STOP_SERVICE -> {
                     Timber.d("stoped service")
@@ -69,17 +74,7 @@ class ForegroundService : LifecycleService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(notificationManager)
         }
-
-
         startForeground(NOTIFICATION_ID, baseNotificationBuilder.build())
-
-        timeRunInSeconds.observe(this, Observer {
-            if (!serviceKilled){
-                val notification = curNotificationBuilder
-                    .setContentText(TrackingUtility.getFormattedStopWatchTime(it * 1000))
-                notificationManager.notify(NOTIFICATION_ID,notification.build())
-            }
-        })
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
